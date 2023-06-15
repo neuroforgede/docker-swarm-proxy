@@ -23,5 +23,5 @@ export DOCKER_HOST=<...>
 Run any docker command, e.g. `docker ps`:
 
 ```bash
-docker run --network docker_swarm_proxy --env TARGET_HOST=<target_hostname> --rm -it ghcr.io/neuroforgede/docker-swarm-proxy:master ps
+docker run --network docker_swarm_proxy --env TARGET_HOST=<target_hostname> --rm -it ghcr.io/neuroforgede/docker-swarm-proxy/docker:master ps
 ```
