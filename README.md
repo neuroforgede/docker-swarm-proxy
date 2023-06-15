@@ -19,5 +19,5 @@ export DOCKER_HOST=<...>
 Run any docker command:
 
 ```bash
-docker run --network docker_swarm_proxy --rm -it <docker image> info
+docker run --network docker_swarm_proxy --rm -it ghcr.io/neuroforgede/docker-swarm-proxy:master info
 ```
