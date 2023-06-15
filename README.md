@@ -1,5 +1,9 @@
 # docker-swarm-proxy
 
+What if you wanted a docker exec, but for Docker swarm?
+
+![grafik](https://github.com/neuroforgede/docker-swarm-proxy/assets/719760/33294423-a874-47ac-86c9-529c39b5f78b)
+
 ## Installation
 
 Install into the swarm
