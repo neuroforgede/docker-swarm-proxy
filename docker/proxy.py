@@ -5,7 +5,7 @@ import sys
 
 TARGET_HOST = os.environ['TARGET_HOST']
 
-answer = dns.resolver.resolve('tasks.docker_socket_proxy', 'A')
+answer = dns.resolver.resolve('tasks.docker_swarm_proxy', 'A')
 for rdata in answer:    
     client = docker.DockerClient(base_url=f'tcp://{rdata.address}:2375')
     info = client.info()
