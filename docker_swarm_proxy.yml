@@ -35,7 +35,7 @@ services:
       mode: global
 
 networks:
-  docker_exec:
+  docker_swarm_proxy:
     driver: overlay
     attachable: true
     name: docker_swarm_proxy
