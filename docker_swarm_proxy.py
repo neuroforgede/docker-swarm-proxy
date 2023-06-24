@@ -16,7 +16,7 @@ if len(sys.argv) == 2:
     "SchemaVersion": "0.1.0",
     "Vendor": "Martin Braun",
     "Version": "0.0.1",
-    "ShortDescription": "Docker Swarm Exec"
+    "ShortDescription": "Docker Swarm Proxy"
 }     
       """)
       exit(0)
