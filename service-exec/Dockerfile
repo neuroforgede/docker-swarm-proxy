@@ -4,4 +4,4 @@ WORKDIR /code
 COPY service_exec.py service_exec.py
 RUN pip3 install docker
 RUN pip3 install dnspython
-ENTRYPOINT ["/bin/python3"]
+ENTRYPOINT ["/bin/python3", "service_exec.py"]
