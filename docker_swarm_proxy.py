@@ -9,8 +9,6 @@ import sys
 import click
 from typing import List
 
-print(sys.argv)
-
 if len(sys.argv) == 2:
     if sys.argv[1] == 'docker-cli-plugin-metadata':
       print("""
