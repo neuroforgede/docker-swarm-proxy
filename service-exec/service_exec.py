@@ -31,7 +31,7 @@ for rdata in answer:
 
     node_id = info["Swarm"]["NodeID"]
     if node_id == NODE_ID_RUNNING_TASK:
-        os.execvpe('/usr/local/bin/docker', ['/usr/local/bin/docker', 'exec', *FLAGS, CONTAINER_ID, *sys.argv], env={
+        os.execvpe('/usr/local/bin/docker', ['/usr/local/bin/docker', 'exec', *FLAGS, CONTAINER_ID, *sys.argv[1:]], env={
             'DOCKER_HOST': 'tcp://' + str(rdata.address) + ':2375'
         })
 
