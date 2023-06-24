@@ -194,6 +194,7 @@ def service_exec(
             "--env", f"USER_FLAG={user_str}",
             "--env", f"IS_TTY={tty_str}",
             "--env", f"IS_INTERACTIVE={interactive_str}",
+            "--env", f"NODE_ID_RUNNING_TASK={node_id_running_task}",
             "--name", proxy_shell_container_name,
             "--network", network_name,
             "--pull", "always",
