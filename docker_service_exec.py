@@ -5,6 +5,9 @@ import os
 import docker
 import time
 
+target_service = 'vibrant_bell'
+cmd = '/bin/bash'
+
 def get_random_string(length):
     return ''.join(random.choice(string.ascii_letters) for i in range(length))
 
@@ -13,8 +16,6 @@ random_str = get_random_string(32)
 stack_name = f"docker_swarm_proxy_{random_str}"
 network_name = stack_name
 service_name = "srv"
-
-cmd = '/bin/bash'
 
 TEMPLATE = f"""
 version: "3.8"
@@ -125,7 +126,6 @@ try:
         else:
             break
 
-    target_service = 'vibrant_bell'
     service = get_service(target_service)
     
     running_tasks = get_running_tasks(service)
