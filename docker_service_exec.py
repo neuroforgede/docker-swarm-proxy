@@ -188,17 +188,17 @@ def service_exec(
       subprocess.run(
           [
             docker_binary, 
+            "run", 
             "--env", f"PROXY_SERVICE_NAME={proxy_service_name}",
             "--env", f"CONTAINER_ID={container_id}",
             "--env", f"USER_FLAG={user_str}",
             "--env", f"IS_TTY={tty_str}",
             "--env", f"IS_INTERACTIVE={interactive_str}",
-            "run", 
             "--name", proxy_shell_container_name,
             "--network", network_name,
             "--rm",
             *docker_flags,
-            "ghcr.io/neuroforgede/docker-swarm-proxy/docker:master",
+            "ghcr.io/neuroforgede/docker-swarm-proxy/service-exec:master",
             *arg
           ],
           env={
