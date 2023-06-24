@@ -199,8 +199,10 @@ def service_exec(
             "--network", network_name,
             "--pull", "always",
             "--rm",
+            "--entrypoint", "python3",
             *docker_flags,
             "ghcr.io/neuroforgede/docker-swarm-proxy/service-exec:master",
+            "service_exec.py",
             command,
             *arg
           ],
