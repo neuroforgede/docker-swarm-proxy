@@ -4,6 +4,18 @@ import subprocess
 import os
 import docker
 import time
+import sys
+
+if sys.argv[1] == 'docker-cli-plugin-metadata':
+    print(f"""
+{
+     "SchemaVersion": "0.1.0",
+     "Vendor": "Martin Braun",
+     "Version": "0.0.1",
+     "ShortDescription": "Docker Swarm Exec"
+}         
+""")
+    exit(0)
 
 target_service = 'vibrant_bell'
 cmd = '/bin/bash'
