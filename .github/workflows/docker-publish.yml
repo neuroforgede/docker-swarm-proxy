@@ -27,6 +27,8 @@ jobs:
       matrix:
         program:
         - docker
+        - service-exec
+
 
     runs-on: ubuntu-latest
     permissions:
