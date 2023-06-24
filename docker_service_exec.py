@@ -8,7 +8,6 @@ import time
 import sys
 import click
 from typing import List
-import shlex
 
 if len(sys.argv) == 2:
     if sys.argv[1] == 'docker-cli-plugin-metadata':
