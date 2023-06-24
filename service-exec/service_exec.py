@@ -5,6 +5,7 @@ import sys
 
 PROXY_SERVICE_NAME = os.environ['PROXY_SERVICE_NAME']
 CONTAINER_ID = os.environ['CONTAINER_ID']
+NODE_ID_RUNNING_TASK = os.environ['NODE_ID_RUNNING_TASK']
 
 USER_FLAG = os.getenv('USER_FLAG', '')
 IS_TTY = os.getenv('IS_TTY', '')
@@ -29,7 +30,10 @@ for rdata in answer:
     info = client.info()
 
     node_id = info["Swarm"]["NodeID"]
-    if node_id == "{node_id_running_task}":
+    if node_id == NODE_ID_RUNNING_TASK:
         os.execvpe('/usr/local/bin/docker', ['/usr/local/bin/docker', 'exec', *FLAGS, CONTAINER_ID, sys.argv[1:]], env={
             'DOCKER_HOST': 'tcp://' + str(rdata.address) + ':2375'
         })
+
+print("did not find node " + NODE_ID_RUNNING_TASK, file=sys.stderr)
+exit(1)

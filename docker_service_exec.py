@@ -196,6 +196,7 @@ def service_exec(
             "--env", f"IS_INTERACTIVE={interactive_str}",
             "--name", proxy_shell_container_name,
             "--network", network_name,
+            "--pull", "always",
             "--rm",
             *docker_flags,
             "ghcr.io/neuroforgede/docker-swarm-proxy/service-exec:master",
