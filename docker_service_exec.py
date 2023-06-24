@@ -198,9 +198,11 @@ def service_exec(
             "--name", proxy_shell_container_name,
             "--network", network_name,
             "--pull", "always",
+            "--entrypoint", "python3",
             "--rm",
             *docker_flags,
             "ghcr.io/neuroforgede/docker-swarm-proxy/service-exec:master",
+            "service_exec.py",
             *arg
           ],
           env={

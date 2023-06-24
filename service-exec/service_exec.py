@@ -23,6 +23,7 @@ if IS_TTY != '':
 if IS_INTERACTIVE != '':
     FLAGS.append('-i')
 
+print(sys.argv)
 
 answer = dns.resolver.resolve(f'tasks.{PROXY_SERVICE_NAME}', 'A')
 for rdata in answer:    
