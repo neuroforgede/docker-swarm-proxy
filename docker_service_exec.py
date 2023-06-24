@@ -89,8 +89,23 @@ def get_service(name):
         raise AssertionError(f'did not find exactly one service with name {name}')
     return services[0]
 
-
+needs_cleanup = False
 try:
+    from_env = docker.from_env()
+
+    service = get_service(target_service)
+    
+    running_tasks = get_running_tasks(service)
+    if len(running_tasks) == 0:
+        raise AssertionError(f"didn't find running task for service {target_service}")
+    
+    running_task = running_tasks[0]
+    node_id_running_task = running_task["NodeID"]
+    container_id = running_task["Status"]["ContainerStatus"]["ContainerID"]
+
+    # TODO: dont deploy the service to all nodes, but instead only
+    # to the one we care about that is running the task
+    needs_cleanup = True
     subprocess.run(
         [docker_binary, "stack", "deploy", "-c", "-", stack_name],
         env={
@@ -100,8 +115,6 @@ try:
         input=TEMPLATE.encode('utf-8'),
         check=True
     )
-
-    from_env = docker.from_env()
 
     while True:
         # wait for proxy service to be there
@@ -125,16 +138,6 @@ try:
             time.sleep(1)
         else:
             break
-
-    service = get_service(target_service)
-    
-    running_tasks = get_running_tasks(service)
-    if len(running_tasks) == 0:
-        raise AssertionError(f"didn't find running task for service {target_service}")
-    
-    running_task = running_tasks[0]
-    node_id_running_task = running_task["NodeID"]
-    container_id = running_task["Status"]["ContainerStatus"]["ContainerID"]
 
     subprocess.run(
         [docker_binary, "run", "--network", network_name, "--rm", "-it", "--entrypoint", "/bin/sh", "ghcr.io/neuroforgede/docker-swarm-proxy/docker:master", "-c", f"""
@@ -165,11 +168,12 @@ exec python3 script.py
         check=True
     )
 finally:
-    subprocess.run(
-        [docker_binary, "stack", "rm", stack_name],
-        env={
-            **os.environ,
-        },
-        cwd=os.getcwd(),
-        check=True
-    )
+    if needs_cleanup:
+        subprocess.run(
+            [docker_binary, "stack", "rm", stack_name],
+            env={
+                **os.environ,
+            },
+            cwd=os.getcwd(),
+            check=True
+        )
