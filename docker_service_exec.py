@@ -3,6 +3,7 @@ import string
 import subprocess
 import os
 import docker
+import time
 
 def get_random_string(length):
     return ''.join(random.choice(string.ascii_letters) for i in range(length))
@@ -68,6 +69,25 @@ if os.path.isfile("/bin/docker"):
 elif os.path.isfile("/usr/bin/docker"):
     docker_binary = "/usr/bin/docker"
 
+def get_running_tasks(service):
+    return [
+        task
+        for task in service.tasks()
+        if  "Spec" in task 
+        and "DesiredState" in task
+        and task["DesiredState"] == "running"
+        and "Status" in task
+        and "State" in task["Status"]
+        and task["Status"]["State"] == "running"
+    ]
+
+
+def get_service(name):
+    services = from_env.services.list(filters={"name": name})
+    if len(services) != 1:
+        raise AssertionError(f'did not find exactly one service with name {name}')
+    return services[0]
+
 
 try:
     subprocess.run(
@@ -81,25 +101,34 @@ try:
     )
 
     from_env = docker.from_env()
-    target_service = 'vibrant_bell'
-    services = from_env.services.list(filters={"name": target_service})
-    if len(services) != 1:
-        raise AssertionError(f'did not find exactly one service with name {target_service}')
-    service = services[0]
 
-    import time
-    time.sleep(10)
+    while True:
+        # wait for proxy service to be there
+        service = get_service(f'{stack_name}_{service_name}')
+        all_tasks = service.tasks()
+        desired_running = [
+            task
+            for task in all_tasks
+            if  "Spec" in task 
+            and "DesiredState" in task
+            and task["DesiredState"] == "running"
+        ]
+        actually_running = [
+            task
+            for task in desired_running
+            if "Status" in task
+            and "State" in task["Status"]
+            and task["Status"]["State"] == "running"
+        ]
+        if len(desired_running) != len(actually_running):
+            time.sleep(1)
+        else:
+            break
+
+    target_service = 'vibrant_bell'
+    service = get_service(target_service)
     
-    running_tasks = [
-        task
-        for task in service.tasks()
-        if  "Spec" in task 
-        and "DesiredState" in task
-        and task["DesiredState"] == "running"
-        and "Status" in task
-        and "State" in task["Status"]
-        and task["Status"]["State"] == "running"
-    ]
+    running_tasks = get_running_tasks(service)
     if len(running_tasks) == 0:
         raise AssertionError(f"didn't find running task for service {target_service}")
     
