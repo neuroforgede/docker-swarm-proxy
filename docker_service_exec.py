@@ -138,7 +138,7 @@ try:
 
     subprocess.run(
         [docker_binary, "run", "--network", network_name, "--rm", "-it", "--entrypoint", "/bin/sh", "ghcr.io/neuroforgede/docker-swarm-proxy/docker:master", "-c", f"""
-exec python3 <<EOF
+cat > script.py <<EOF
 import docker
 import dns.resolver
 import os
@@ -152,11 +152,11 @@ for rdata in answer:
 
     node_id = info["Swarm"]["NodeID"]
     if node_id == "{node_id_running_task}":
-        subprocess.check_call(['/usr/local/bin/docker', 'exec', '-it', '{container_id}', '{cmd}'], env={'{'}
+        os.execvpe('/usr/local/bin/docker', ['/usr/local/bin/docker', 'exec', '-it', '{container_id}', '{cmd}'], env={'{'}
             'DOCKER_HOST': 'tcp://' + str(rdata.address) + ':2375'
         {'}'})
-        exit(0)
 EOF
+exec python3 script.py
         """],
         env={
             **os.environ,
