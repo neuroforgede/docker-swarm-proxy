@@ -9,17 +9,19 @@ import sys
 import click
 from typing import List
 
+print(sys.argv)
+
 if len(sys.argv) == 2:
     if sys.argv[1] == 'docker-cli-plugin-metadata':
-        print("""
+      print("""
 {
     "SchemaVersion": "0.1.0",
     "Vendor": "Martin Braun",
     "Version": "0.0.1",
     "ShortDescription": "Docker Swarm Exec"
-}         
-    """)
-        exit(0)
+}     
+      """)
+      exit(0)
 
 def get_random_string(length):
     return ''.join(random.choice(string.ascii_letters) for i in range(length))
