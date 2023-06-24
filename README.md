@@ -11,6 +11,6 @@ This project allows you to control any docker engine in the swarm from a manager
 Install to your docker cli
 
 ```bash
-curl https://raw.githubusercontent.com/neuroforgede/docker-swarm-proxy/master/docker_swarm_proxy.py -o ~/.docker/cli-plugins/docker-swarmproxy
+curl -L https://raw.githubusercontent.com/neuroforgede/docker-swarm-proxy/master/docker_swarm_proxy.py -o ~/.docker/cli-plugins/docker-swarmproxy
 chmod +x ~/.docker/cli-plugins/docker-swarmproxy
 ```
