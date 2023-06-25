@@ -24,7 +24,7 @@ if len(sys.argv) >= 2:
 if 'swarmproxy' in sys.argv:
   # we need to strip the first agument for click to work
   # if we run as a docker cli plugin
-  sys.argv = sys.argv[:1]
+  sys.argv = sys.argv[1:]
 
 def get_random_string(length):
     return ''.join(random.choice(string.ascii_letters) for i in range(length))
