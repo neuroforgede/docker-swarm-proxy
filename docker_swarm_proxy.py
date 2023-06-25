@@ -131,16 +131,19 @@ def service_exec(
         and task["Status"]["State"] == "running"
     ]
 
-
-  def get_service(name):
-    services = from_env.services.list(filters={"name": name})
-    if len(services) != 1:
-        raise AssertionError(f'did not find exactly one service with name {name}')
-    return services[0]
-
   needs_cleanup = False
+
   try:
     from_env = docker.from_env(use_ssh_client=True)
+
+    def get_service(name):
+      # get all service with similar name
+      services = from_env.services.list(filters={"name": name})
+      # exact match required
+      services = [service for service in services if service.attrs["Spec"]["Name"] == name]
+      if len(services) != 1:
+          raise AssertionError(f'did not find exactly one service with name {name}')
+      return services[0]
 
     service = get_service(service)
     
