@@ -140,7 +140,7 @@ def service_exec(
 
   needs_cleanup = False
   try:
-    from_env = docker.from_env()
+    from_env = docker.from_env(use_ssh_client=True)
 
     service = get_service(service)
     
