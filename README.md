@@ -10,7 +10,7 @@ A problem with Docker Swarm and automation with it has been that you can't direc
 
 ### Prerequisites
 
-For remote clusters, only usage of the DOCKER_HOST environment variable is supported. Docker Context is not supported.
+For remote clusters, only usage of the DOCKER_HOST environment variable is supported. Usage of Docker Contexts for switching environments is not supported.
 
 Install docker-py and click:
 
