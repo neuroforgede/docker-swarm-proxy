@@ -25,7 +25,7 @@ curl -L https://raw.githubusercontent.com/neuroforgede/docker-swarm-proxy/master
 chmod +x ~/.docker/cli-plugins/docker-swarmproxy
 ```
 
-Or copy from a local copy:
+Or copy from a local copy of this repo:
 
 ```bash
 cp docker_swarm_proxy.py ~/.docker/cli-plugins/docker-swarmproxy
