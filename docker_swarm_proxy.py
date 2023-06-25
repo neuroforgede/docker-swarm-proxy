@@ -134,6 +134,8 @@ def service_exec(
   needs_cleanup = False
 
   try:
+    # force usage of the regular SSH client
+    # to be able to pick up DOCKER_HOST env var automatically
     from_env = docker.from_env(use_ssh_client=True)
 
     def get_service(name):
