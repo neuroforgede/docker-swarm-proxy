@@ -8,7 +8,16 @@ This project allows you to control any docker engine in the swarm from a manager
 
 ## Installation
 
-Install to your docker cli (from github)
+### Prerequisites
+
+Install docker-py and click:
+
+```bash
+pip3 install docker
+pip3 install click
+```
+
+Install the plugin your docker cli (from github)
 
 ```bash
 rm ~/.docker/cli-plugins/docker-swarmproxy
