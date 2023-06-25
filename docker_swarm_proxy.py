@@ -21,7 +21,7 @@ if len(sys.argv) >= 2:
       """)
       exit(0)
 
-if 'swarmproxy' in sys.argv:
+if 'swarmproxy' in sys.argv and len(sys.argv >= 2):
   # we need to strip the first agument for click to work
   # if we run as a docker cli plugin
   sys.argv = sys.argv[1:]
