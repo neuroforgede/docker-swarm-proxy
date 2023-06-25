@@ -8,7 +8,7 @@ This project allows you to control any docker engine in the swarm from a manager
 
 ## Installation
 
-Install to your docker cli
+Install to your docker cli (from github)
 
 ```bash
 rm ~/.docker/cli-plugins/docker-swarmproxy
@@ -16,7 +16,23 @@ curl -L https://raw.githubusercontent.com/neuroforgede/docker-swarm-proxy/master
 chmod +x ~/.docker/cli-plugins/docker-swarmproxy
 ```
 
+Or copy from a local copy:
+
 ```bash
 cp docker_swarm_proxy.py ~/.docker/cli-plugins/docker-swarmproxy
 chmod +x ~/.docker/cli-plugins/docker-swarmproxy
+```
+
+## Usage
+
+### Exec into a running service
+
+```bash
+docker swarmproxy service exec -it vibrant_bell bash
+```
+
+See all available options:
+
+```bash
+docker swarmproxy service exec --help
 ```

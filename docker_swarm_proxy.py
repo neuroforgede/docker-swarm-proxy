@@ -115,6 +115,10 @@ def service_exec(
     command: string,
     arg: List[str]
 ):
+  """
+  Exec into a running service task.
+  By default chooses the first task.
+  """
   def get_running_tasks(service):
     return [
         task
