@@ -1,4 +1,4 @@
-FROM docker:24.0.2-cli
+FROM --platform=${BUILDPLATFORM:-linux/amd64} docker:24.0.2-cli
 RUN apk add python3 py-pip
 WORKDIR /code
 COPY service_exec.py service_exec.py
