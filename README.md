@@ -2,7 +2,7 @@
 
 What if you wanted a docker exec, but for Docker swarm?
 
-This project allows you to control any docker engine in the swarm from a manager (or your local computer if you use SSH proxying).
+A problem with Docker Swarm and automation with it has been that you can't directly exec into any service from the command line. There exist some workarounds to achieve this behaviour, but in the end you want something similar and as convenient as `docker exec` but for services.
 
 ![grafik](https://github.com/neuroforgede/docker-swarm-proxy/assets/719760/e40aae96-1b0f-4193-8f7e-1054b5db6a6e)
 
