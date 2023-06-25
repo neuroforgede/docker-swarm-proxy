@@ -44,8 +44,6 @@ jobs:
         
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-        with:
-          platforms: 'arm64,arm'
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
@@ -85,6 +83,7 @@ jobs:
         uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
         with:
           context: ./${{ matrix.program }}
+          platforms: linux/amd64,linux/arm/v6,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
