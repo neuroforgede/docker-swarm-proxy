@@ -47,3 +47,19 @@ See all available options:
 ```bash
 docker swarmproxy service exec --help
 ```
+
+### Use `-` in the command
+
+Since swarmproxy uses click under the hood for argument parsing, you have to use `--` before any exec command.
+
+This will not work:
+
+```bash
+docker swarmproxy service exec -it vibrant_bell bash -c 'echo hello'
+```
+
+This will work:
+
+```bash
+docker swarmproxy service exec -it vibrant_bell -- bash -c 'echo hello'
+```
