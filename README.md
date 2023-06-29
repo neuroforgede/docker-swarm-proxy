@@ -34,7 +34,7 @@ chmod +x ~/.docker/cli-plugins/docker-swarmproxy
 
 ## Usage
 
-NOTE: For remote clusters, only usage of the DOCKER_HOST environment variable is supported. Usage of Docker Contexts for switching environments is not supported.
+NOTE: For remote clusters, only usage of the DOCKER_HOST environment variable is supported. Usage of Docker Contexts for switching environments is not supported. For remote clusters we strongly advise against exposing the TCP socket directly. Instead use the SSH tunneling support of docker cli as described [here](https://docs.docker.com/engine/security/protect-access/).
 
 ### Exec into a running service
 
